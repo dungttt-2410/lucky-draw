@@ -484,11 +484,20 @@ function showWinner(prize){
 
     winSound.currentTime = 0;
     winSound.play().catch(()=>{});
-	setTimeout(() => {
-	    winSound.pause();
-	    winSound.currentTime = 0;
-	}, 2000); // 2000ms = 2 giây
 
+	setTimeout(() => {
+	    let fade = setInterval(() => {
+	        if (winSound.volume > 0.1) {
+	            winSound.volume -= 0.1;
+	        } else {
+	            clearInterval(fade);
+	            winSound.pause();
+	            winSound.currentTime = 0;
+	            winSound.volume = 1;
+	        }
+	    }, 100);
+	}, 1500);
+	
     confetti({particleCount:300,spread:150});
 
     document.getElementById("winnerName").innerHTML = currentName;
@@ -591,4 +600,5 @@ function exportWinners() {
 </script>
 </body>
 </html>
+
 
