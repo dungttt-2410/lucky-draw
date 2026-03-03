@@ -484,6 +484,10 @@ function showWinner(prize){
 
     winSound.currentTime = 0;
     winSound.play().catch(()=>{});
+	setTimeout(() => {
+	    winSound.pause();
+	    winSound.currentTime = 0;
+	}, 2000); // 2000ms = 2 giây
 
     confetti({particleCount:300,spread:150});
 
@@ -587,3 +591,4 @@ function exportWinners() {
 </script>
 </body>
 </html>
+
